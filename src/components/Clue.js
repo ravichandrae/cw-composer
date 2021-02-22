@@ -1,9 +1,14 @@
-import React from 'react';
+import React from "react";
+
+const leftPaneStyle = {
+  float: "left"
+};
 
 export default function Clue(props) {
-    return (
-        <textarea>
-            
-        </textarea>
-    );
+  return (
+    <div>
+      <p style={leftPaneStyle}>{props.cellNumber}</p>
+      <textarea></textarea>
+    </div>
+  );
 }
