@@ -25,9 +25,7 @@ export default function Clues(props) {
           }
         }
       }
-      alert(JSON.stringify(aClues));
       setAcrossClues(aClues);
-      alert(JSON.stringify(acrossClues));
     };
 
     const getDownClues = () => {
@@ -66,8 +64,8 @@ export default function Clues(props) {
     <div>
       <div style={leftPaneStyle}>
         <h2> Across </h2>
-        {!acrossClues &&
-          acrossClues.map((k, v) => (
+        {acrossClues &&
+          Object.entries(acrossClues).map(([k, v]) => (
             <Clue
               data={v}
               key={`across_${v.row}_${v.col}`}
@@ -78,8 +76,8 @@ export default function Clues(props) {
       </div>
       <div style={leftPaneStyle}>
         <h2> Down </h2>
-        {!downClues &&
-          downClues.map((k, v) => (
+        {downClues &&
+          Object.entries(downClues).map(([k, v]) => (
             <Clue
               data={v}
               key={`down_${v.row}_${v.col}`}
