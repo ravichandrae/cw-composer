@@ -10,7 +10,6 @@ export default function Clue(props) {
   function handleClueChange({ target }) {
     let newData = JSON.parse(JSON.stringify(data));
     newData.clue = target.value;
-    alert(JSON.stringify(newData));
     setData(newData);
     props.clueChangeHandler(props.direction, newData);
   }
