@@ -5,7 +5,7 @@ const tableCellStyle = {
 };
 
 const inputStyle = {
-  fontSize: "24px",
+  fontSize: "18px",
   textTransform: "uppercase",
   outline: 0,
   border: 0,

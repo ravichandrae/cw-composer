@@ -50,40 +50,44 @@ export default function Clues(props) {
 
   function handleClueChange(direction, clue) {
     if (direction === "across") {
-      acrossClues[clue.cellNumber] = clue;
-      setAcrossClues(acrossClues);
+      let newClues = JSON.parse(JSON.stringify(acrossClues));
+      newClues[clue.cellNumber] = clue;
+      setAcrossClues(newClues);
     } else if (direction === "down") {
-      downClues[clue.cellNumber] = clue;
-      setDownClues(downClues);
+      let newClues = JSON.parse(JSON.stringify(downClues));
+      newClues[clue.cellNumber] = clue;
+      setDownClues(newClues);
     }
     props.clueChangeHandler(direction, clue);
   }
 
   return (
-    <div>
-      <div style={leftPaneStyle}>
-        <h2> Across </h2>
-        {acrossClues &&
-          Object.entries(acrossClues).map(([k, v]) => (
-            <Clue
-              data={v}
-              key={`across_${v.row}_${v.col}`}
-              direction="across"
-              clueChangeHandler={handleClueChange}
-            />
-          ))}
-      </div>
-      <div style={leftPaneStyle}>
-        <h2> Down </h2>
-        {downClues &&
-          Object.entries(downClues).map(([k, v]) => (
-            <Clue
-              data={v}
-              key={`down_${v.row}_${v.col}`}
-              direction="down"
-              clueChangeHandler={handleClueChange}
-            />
-          ))}
+    <div className="col-sm-6">
+      <div className="row">
+        <div className="col-sm-6">
+          <h6> Across </h6>
+          {acrossClues &&
+            Object.entries(acrossClues).map(([k, v]) => (
+              <Clue
+                data={v}
+                key={`across_${v.row}_${v.col}`}
+                direction="across"
+                clueChangeHandler={handleClueChange}
+              />
+            ))}
+        </div>
+        <div className="col-sm-6">
+          <h6> Down </h6>
+          {downClues &&
+            Object.entries(downClues).map(([k, v]) => (
+              <Clue
+                data={v}
+                key={`down_${v.row}_${v.col}`}
+                direction="down"
+                clueChangeHandler={handleClueChange}
+              />
+            ))}
+        </div>
       </div>
     </div>
   );

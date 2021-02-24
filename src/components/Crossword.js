@@ -96,23 +96,23 @@ export default function Crossword() {
   }
 
   return (
-    <div>
-      <div style={leftPaneStyle}>
-        <Controls
-          gridSizeChangeHandler={handleGridSizeChange}
-          modeChangeHandler={handleModeChange}
-          fileUploadHandler={handleFileUpload}
-          mode={mode}
-          data={gridData}
-        />
-        <Grid
-          size={gridSize}
-          mode={mode}
-          data={gridData}
-          stateChangeHandler={handleStateChange}
-        />
-      </div>
-      <div style={cluesPaneStyle}>
+    <div className="container">
+      <Controls
+        gridSizeChangeHandler={handleGridSizeChange}
+        modeChangeHandler={handleModeChange}
+        fileUploadHandler={handleFileUpload}
+        mode={mode}
+        data={gridData}
+      />
+      <div className="row">
+        <div className="col-sm-6">
+          <Grid
+            size={gridSize}
+            mode={mode}
+            data={gridData}
+            stateChangeHandler={handleStateChange}
+          />
+        </div>
         <Clues
           gridSize={gridSize}
           data={gridData}

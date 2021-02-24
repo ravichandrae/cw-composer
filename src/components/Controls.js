@@ -124,7 +124,6 @@ export default function Controls(props) {
     if (dataSplit[1] && dataSplit[2]) {
       fillClues(dataSplit[1].trim(), dataSplit[2].trim(), gridData);
     }
-
     return gridData;
   }
 
@@ -149,52 +148,53 @@ export default function Controls(props) {
   }
 
   return (
-    <div>
-      <div style={leftPaneStyle}>
-        <label>
-          Grid Size:
+    <div className="row">
+      <div className="col-sm-6">
+        <div className="form-group">
+          <label>Grid Size:</label>
           <input
             type="number"
             value={gridSize}
             onChange={gridSizeChangeHandler}
+            className="form-control"
           />
-        </label>
-        <div>
-          <label>
-            <input
-              type="radio"
-              value="mark"
-              name="mode"
-              onChange={modeChangeHandler}
-              checked={mode === "mark" ? true : false}
-            />
-            Mark
-          </label>
-          <label>
-            <input
-              type="radio"
-              value="fill"
-              name="mode"
-              onChange={modeChangeHandler}
-              checked={mode === "fill" ? true : false}
-            />
-            Fill
-          </label>
+        </div>
+        <div className="form-group">
+          <label>Mode:</label>
+          <input
+            type="radio"
+            value="mark"
+            name="mode"
+            onChange={modeChangeHandler}
+            checked={mode === "mark" ? true : false}
+          />
+          Mark
+          <input
+            type="radio"
+            value="fill"
+            name="mode"
+            onChange={modeChangeHandler}
+            checked={mode === "fill" ? true : false}
+          />
+          Fill
         </div>
       </div>
-      <div style={leftPaneStyle}>
-        <div>
+      <div className="col-sm-6">
+        <div className="form-group">
           <label>Import from a File:</label>
-          <input type="file" onChange={uploadFile} />
+          <input type="file" onChange={uploadFile} className="form-control" />
         </div>
-        <div>
+        <div className="form-group">
           <label>Export to a File:</label>
           <input
             type="text"
             value={downloadFileName}
             onChange={handleFileNameChange}
+            className="form-control"
           />
-          <button onClick={handleExport}>Export</button>
+          <button onClick={handleExport} className="btn btn-default">
+            Export
+          </button>
         </div>
       </div>
     </div>
