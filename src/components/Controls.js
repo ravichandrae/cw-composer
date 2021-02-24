@@ -36,6 +36,10 @@ export default function Controls(props) {
       }
       gridText += "\n";
     }
+    gridText += "===";
+    gridText += getAcrossClues();
+    gridText += "===";
+    gridText += getDownClues();
 
     const blob = new Blob([gridText]);
     let url = URL.createObjectURL(blob);
@@ -43,6 +47,32 @@ export default function Controls(props) {
     a.href = url;
     a.download = downloadFileName;
     a.click();
+  }
+
+  function getAcrossClues() {
+    let acrossClues = "";
+    for (var i = 0; i < gridSize; i++) {
+      for (var j = 0; j < gridSize; j++) {
+        if (props.data[i][j].across) {
+          acrossClues += props.data[i][j].across;
+          acrossClues += "\n";
+        }
+      }
+    }
+    return acrossClues;
+  }
+
+  function getDownClues() {
+    let downClues = "";
+    for (var i = 0; i < gridSize; i++) {
+      for (var j = 0; j < gridSize; j++) {
+        if (props.data[i][j].down) {
+          downClues += props.data[i][j].down;
+          downClues += "\n";
+        }
+      }
+    }
+    return downClues;
   }
 
   function handleFileNameChange({ target }) {
@@ -91,8 +121,9 @@ export default function Controls(props) {
       gridData.push(row);
     }
     generateCellNumbers(gridData);
-
-    fillClues(dataSplit[1].trim(), dataSplit[2].trim(), gridData);
+    if (dataSplit[1] && dataSplit[2]) {
+      fillClues(dataSplit[1].trim(), dataSplit[2].trim(), gridData);
+    }
 
     return gridData;
   }

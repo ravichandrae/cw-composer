@@ -46,18 +46,17 @@ export default function Clues(props) {
     };
     getAcrossClues();
     getDownClues();
-  }, [props.data, props.gridSize]);
+  }, [props]);
 
   function handleClueChange(direction, clue) {
     if (direction === "across") {
       acrossClues[clue.cellNumber] = clue;
       setAcrossClues(acrossClues);
-      props.clueChangeHandler(direction, clue);
     } else if (direction === "down") {
       downClues[clue.cellNumber] = clue;
       setDownClues(downClues);
-      props.clueChangeHandler(direction, clue);
     }
+    props.clueChangeHandler(direction, clue);
   }
 
   return (

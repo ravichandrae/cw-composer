@@ -5,7 +5,7 @@ const leftPaneStyle = {
 };
 
 export default function Clue(props) {
-  const [data, setData] = useState(() => props.data);
+  const [data, setData] = useState(props.data);
 
   function handleClueChange({ target }) {
     data.clue = target.value;

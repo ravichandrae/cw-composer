@@ -58,7 +58,7 @@ export default function Cell(props) {
     props.stateChangeHandler({
       row: props.row,
       col: props.id,
-      cell: { content: text, isBlocked: isBlocked }
+      cell: { content: target.value, isBlocked: isBlocked }
     });
   };
 

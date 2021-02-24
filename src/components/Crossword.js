@@ -27,7 +27,7 @@ export default function Crossword() {
   const [mode, setMode] = useState("mark");
 
   function handleModeChange(changedMode) {
-    let data = gridData;
+    let data = JSON.parse(JSON.stringify(gridData));
     setMode(changedMode);
     if (changedMode === "fill") {
       generateCellNumbers(data);
@@ -79,19 +79,20 @@ export default function Crossword() {
   const [gridData, setGridData] = useState(getInitialCellData());
 
   function handleStateChange(changedData) {
-    let data = gridData;
+    let data = JSON.parse(JSON.stringify(gridData));
     data[changedData.row][changedData.col] = changedData.cell;
     generateCellNumbers(data);
     setGridData(data);
   }
 
   function handleClueChanges(direction, changedClue) {
+    let data = JSON.parse(JSON.stringify(gridData));
     if (direction === "across") {
-      gridData[changedClue.row][changedClue.col].across = changedClue.clue;
+      data[changedClue.row][changedClue.col].across = changedClue.clue;
     } else if (direction === "down") {
-      gridData[changedClue.row][changedClue.col].down = changedClue.clue;
+      data[changedClue.row][changedClue.col].down = changedClue.clue;
     }
-    setGridData(gridData);
+    setGridData(data);
   }
 
   return (
