@@ -85,6 +85,10 @@ export default function Crossword() {
     setGridData(data);
   }
 
+  function clearGrid() {
+    setGridData(getInitialCellData());
+  }
+
   function handleClueChanges(direction, changedClue) {
     let data = JSON.parse(JSON.stringify(gridData));
     if (direction === "across") {
@@ -101,6 +105,7 @@ export default function Crossword() {
         gridSizeChangeHandler={handleGridSizeChange}
         modeChangeHandler={handleModeChange}
         fileUploadHandler={handleFileUpload}
+        clearGridHandler={clearGrid}
         mode={mode}
         data={gridData}
       />

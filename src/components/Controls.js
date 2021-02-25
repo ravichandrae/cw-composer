@@ -178,6 +178,11 @@ export default function Controls(props) {
           />
           Fill
         </div>
+        <div>
+        <button onClick={() => props.clearGridHandler()} className="btn btn-default">
+            Clear
+          </button>
+        </div>
       </div>
       <div className="col-sm-6">
         <div className="form-group">
