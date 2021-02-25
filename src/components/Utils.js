@@ -1,32 +1,46 @@
 export function generateCellNumbers(grid) {
+  let newGrid = [];
   var cellNumber = 1;
   for (var i = 0; i < grid.length; i++) {
-    for (var j = 0; j < grid[i].length; j++) {
-      var needCellNumber = false;
-      if (needCellNumberAcross(grid, i, j)) {
-        grid[i][j].cellNumber = cellNumber.toString();
-        grid[i][j].across = "";
-        grid[i][j].down = null;
+    let newRow = [];
+    for(var j = 0; j < grid[i].length; j++) {
+      let newCell = {};
+      let needCellNumber = false;
+      newCell.content = grid[i][j].content;
+      newCell.isBlocked = grid[i][j].isBlocked;
+      
+      let isClueNeededAcross = needClueAcross(grid, i, j);
+      let isClueNeededDown = needClueDown(grid, i, j);
+      if (isClueNeededAcross && isClueNeededDown) {
+        //If previous grid contains a clue, retain it; happens when we load the grid from a file
+        //Otherwise initialize them with empty string
+        newCell.across = grid[i][j].across? grid[i][j].across: "";
+        newCell.down = grid[i][j].down? grid[i][j].down: ""
         needCellNumber = true;
-      }
-      if (needCellNumberDown(grid, i, j)) {
-        grid[i][j].cellNumber = cellNumber.toString();
-        if (!needCellNumber) grid[i][j].across = null;
-        grid[i][j].down = "";
+      } else if(isClueNeededAcross) {
+        newCell.across = grid[i][j].across? grid[i][j].across: "";
+        newCell.down = null;
         needCellNumber = true;
-      }
-      if (needCellNumber) {
-        cellNumber++;
+      } else if(isClueNeededDown) {
+        newCell.down = grid[i][j].down? grid[i][j].down: "";
+        newCell.across = null;
+        needCellNumber = true;
       } else {
-        grid[i][j].cellNumber = "";
-        grid[i][j].across = null;
-        grid[i][j].down = null;
+        newCell.across = null;
+        newCell.down = null;
       }
+      if(needCellNumber) {
+        newCell.cellNumber = cellNumber.toString();
+        cellNumber += 1;
+      }
+      newRow.push(newCell);
     }
+    newGrid.push(newRow);
   }
+  return newGrid;
 }
 
-function needCellNumberAcross(data, i, j) {
+function needClueAcross(data, i, j) {
   if (data[i][j].isBlocked) return false;
   if (isLeftCellBlocked(data, i, j)) {
     if (isRightCellBlocked(data, i, j)) {
@@ -40,7 +54,7 @@ function needCellNumberAcross(data, i, j) {
   return false;
 }
 
-function needCellNumberDown(data, i, j) {
+function needClueDown(data, i, j) {
   if (data[i][j].isBlocked) return false;
   if (isTopCellBlocked(data, i, j) && !isBottomCellBlocked(data, i, j))
     return true;

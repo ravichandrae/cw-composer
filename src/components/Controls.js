@@ -120,11 +120,11 @@ export default function Controls(props) {
       }
       gridData.push(row);
     }
-    generateCellNumbers(gridData);
+    let newGridData = generateCellNumbers(gridData);
     if (dataSplit[1] && dataSplit[2]) {
-      fillClues(dataSplit[1].trim(), dataSplit[2].trim(), gridData);
+      fillClues(dataSplit[1].trim(), dataSplit[2].trim(), newGridData);
     }
-    return gridData;
+    return newGridData;
   }
 
   function fillClues(acrossClues, downClues, gridData) {
@@ -139,7 +139,7 @@ export default function Controls(props) {
           gridData[i][j].across = acrossClueLines[acrossClueIndex];
           acrossClueIndex++;
         }
-        if (gridData[i][j].down != null) {
+        if (gridData[i][j].down !== null) {
           gridData[i][j].down = downClueLines[downClueIndex];
           downClueIndex++;
         }
@@ -151,32 +151,36 @@ export default function Controls(props) {
     <div className="row">
       <div className="col-sm-6">
         <div className="form-group">
-          <label>Grid Size:</label>
-          <input
-            type="number"
-            value={gridSize}
-            onChange={gridSizeChangeHandler}
-            className="form-control"
-          />
+          <label className="control-label col-sm-4">Grid Size:</label>
+          <div className="col-sm-8">
+            <input
+              type="number"
+              value={gridSize}
+              onChange={gridSizeChangeHandler}
+              className="form-control"
+            />
+          </div> 
         </div>
         <div className="form-group">
-          <label>Mode:</label>
-          <input
-            type="radio"
-            value="mark"
-            name="mode"
-            onChange={modeChangeHandler}
-            checked={mode === "mark" ? true : false}
-          />
-          Mark
-          <input
-            type="radio"
-            value="fill"
-            name="mode"
-            onChange={modeChangeHandler}
-            checked={mode === "fill" ? true : false}
-          />
-          Fill
+          <label className="control-label col-sm-4">Mode:</label>
+          <div className="control-label col-sm-4">
+            <input
+              type="radio"
+              value="mark"
+              name="mode"
+              onChange={modeChangeHandler}
+              checked={mode === "mark" ? true : false}
+            />
+            <label className="control-label col-sm-4">Mark</label>
+            <input
+              type="radio"
+              value="fill"
+              name="mode"
+              onChange={modeChangeHandler}
+              checked={mode === "fill" ? true : false}
+            />
+            <label className="control-label col-sm-4">Fill</label>
+          </div>
         </div>
         <div>
         <button onClick={() => props.clearGridHandler()} className="btn btn-default">
@@ -186,11 +190,11 @@ export default function Controls(props) {
       </div>
       <div className="col-sm-6">
         <div className="form-group">
-          <label>Import from a File:</label>
+          <label className="control-label col-sm-4">Import from a File:</label>
           <input type="file" onChange={uploadFile} className="form-control" />
         </div>
         <div className="form-group">
-          <label>Export to a File:</label>
+          <label className="control-label col-sm-4">Export to a File:</label>
           <input
             type="text"
             value={downloadFileName}

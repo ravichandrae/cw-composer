@@ -20,18 +20,17 @@ export default function Crossword() {
   function handleGridSizeChange(size) {
     setGridSize(size);
     let adjustedData = adjustGridData(size);
-    generateCellNumbers(adjustedData);
-    setGridData(adjustedData);
+    let newGridData = generateCellNumbers(adjustedData);
+    setGridData(newGridData);
   }
 
   const [mode, setMode] = useState("mark");
 
   function handleModeChange(changedMode) {
-    let data = JSON.parse(JSON.stringify(gridData));
     setMode(changedMode);
     if (changedMode === "fill") {
-      generateCellNumbers(data);
-      setGridData(data);
+      let newGridData = generateCellNumbers(gridData);
+      setGridData(newGridData);
     }
   }
 
@@ -79,10 +78,9 @@ export default function Crossword() {
   const [gridData, setGridData] = useState(getInitialCellData());
 
   function handleStateChange(changedData) {
-    let data = JSON.parse(JSON.stringify(gridData));
-    data[changedData.row][changedData.col] = changedData.cell;
-    generateCellNumbers(data);
-    setGridData(data);
+    gridData[changedData.row][changedData.col] = changedData.cell;
+    let newGridData = generateCellNumbers(gridData);
+    setGridData(newGridData);
   }
 
   function clearGrid() {

@@ -10,7 +10,7 @@ export default function Clues(props) {
   function handleClueChange(direction, clue) {
     props.clueChangeHandler(direction, clue);
   }
-
+  console.log(JSON.stringify(props.data));
   return (
     <div className="col-sm-6">
       <div className="row">
@@ -18,7 +18,7 @@ export default function Clues(props) {
           <h6> Across </h6>
           {props.data.map((row, i) =>
             row.map((cell, j) =>
-              cell.across !== null ? (
+              (cell.across != null)? (
                 <Clue
                   data={cell}
                   key={`across_${i}_${j}`}
@@ -37,10 +37,10 @@ export default function Clues(props) {
           <h6> Down </h6>
           {props.data.map((row, i) =>
             row.map((cell, j) =>
-              cell.down !== null ? (
+              (cell.down != null)? (
                 <Clue
                   data={cell}
-                  key={`across_${i}_${j}`}
+                  key={`down${i}_${j}`}
                   row={i}
                   col={j}
                   direction="down"
