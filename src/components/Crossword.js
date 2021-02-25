@@ -88,9 +88,9 @@ export default function Crossword() {
   function handleClueChanges(direction, changedClue) {
     let data = JSON.parse(JSON.stringify(gridData));
     if (direction === "across") {
-      data[changedClue.row][changedClue.col].across = changedClue.clue;
+      data[changedClue.row][changedClue.col].across = changedClue.across;
     } else if (direction === "down") {
-      data[changedClue.row][changedClue.col].down = changedClue.clue;
+      data[changedClue.row][changedClue.col].down = changedClue.down;
     }
     setGridData(data);
   }

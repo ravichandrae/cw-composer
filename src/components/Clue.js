@@ -9,7 +9,13 @@ export default function Clue(props) {
 
   function handleClueChange({ target }) {
     let newData = JSON.parse(JSON.stringify(data));
-    newData.clue = target.value;
+    newData.row = props.row;
+    newData.col = props.col;
+    if(props.direction === "across") {
+      newData.across = target.value;
+    } else {
+      newData.down = target.value;
+    }
     setData(newData);
     props.clueChangeHandler(props.direction, newData);
   }
@@ -18,7 +24,7 @@ export default function Clue(props) {
     <div className="form-group">
       <p style={leftPaneStyle}>{data.cellNumber}</p>
       <textarea
-        value={data.clue}
+        value={props.direction === "across"? props.data.across : props.data.down}
         onChange={handleClueChange}
         className="form-control"
       ></textarea>
