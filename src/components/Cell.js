@@ -32,10 +32,14 @@ export default function Cell(props) {
   const [isBlocked, setIsBlocked] = useState(
     props.data[props.row][props.id].isBlocked
   );
+  const [cellNumber, setCellNumber] = useState(
+    props.data[props.row][props.id].cellNumber
+  );
 
   useEffect(() => {
     setText(props.data[props.row][props.id].content);
     setIsBlocked(props.data[props.row][props.id].isBlocked);
+    setCellNumber(props.data[props.row][props.id].cellNumber);
   }, [props.data, props.id, props.row]);
 
   const handleCellClick = ({ target }) => {
@@ -64,9 +68,7 @@ export default function Cell(props) {
 
   return (
     <td style={isBlocked ? blockedTableCellStyle : tableCellStyle}>
-      <div style={cellNumberStyle}>
-        {props.data[props.row][props.id].cellNumber}
-      </div>
+      <div style={cellNumberStyle}>{cellNumber}</div>
       <input
         style={inputStyle}
         type="text"

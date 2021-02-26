@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const leftPaneStyle = {
   float: "left"
@@ -19,6 +19,10 @@ export default function Clue(props) {
     setData(newData);
     props.clueChangeHandler(props.direction, newData);
   }
+
+  useEffect(() => {
+    setData(props.data);
+  }, [props]);
 
   return (
     <div className="form-group">

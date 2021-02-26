@@ -28,10 +28,8 @@ export default function Crossword() {
 
   function handleModeChange(changedMode) {
     setMode(changedMode);
-    if (changedMode === "fill") {
-      let newGridData = generateCellNumbers(gridData);
-      setGridData(newGridData);
-    }
+    let newGridData = generateCellNumbers(gridData);
+    setGridData(newGridData);
   }
 
   function handleFileUpload(data) {

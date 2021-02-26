@@ -159,11 +159,11 @@ export default function Controls(props) {
               onChange={gridSizeChangeHandler}
               className="form-control"
             />
-          </div> 
+          </div>
         </div>
         <div className="form-group">
           <label className="control-label col-sm-4">Mode:</label>
-          <div className="control-label col-sm-4">
+          <div>
             <input
               type="radio"
               value="mark"
@@ -183,7 +183,10 @@ export default function Controls(props) {
           </div>
         </div>
         <div>
-        <button onClick={() => props.clearGridHandler()} className="btn btn-default">
+          <button
+            onClick={() => props.clearGridHandler()}
+            className="btn btn-default"
+          >
             Clear
           </button>
         </div>
